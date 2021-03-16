@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="568ee4ec-813c-488e-a1ed-2975e58bd8d7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/libraries/Maven__com_github_javafaker_javafaker_1_0_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/libraries/Maven__com_github_mifmif_generex_1_0_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/libraries/Maven__dk_brics_automaton_automaton_1_11_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/libraries/Maven__org_yaml_snakeyaml_android_1_23.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/src/com/company/Problem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/src/com/company/Solution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/lab4.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/src/com/company/School.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/src/com/company/School.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/src/com/company/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/src/com/company/Student.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1pqHb06J4vOvCQNShoCVI9hg5ZR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="568ee4ec-813c-488e-a1ed-2975e58bd8d7" name="Default Changelist" comment="" />
+      <created>1615903767912</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615903767912</updated>
+      <workItem from="1615903769030" duration="27000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
