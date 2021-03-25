@@ -1,7 +1,8 @@
 package com.company;
 
 import javax.swing.*;
-import java.awt.*;
+
+import static java.awt.BorderLayout.*;
 
 public class MainFrame extends JFrame {
     ConfigPanel configPanel;
@@ -9,25 +10,27 @@ public class MainFrame extends JFrame {
     DrawingPanel canvas;
 
     public MainFrame() {
-        super("My Drawing Application");
+        super("My Application for Drawing");
         init();
     }
 
     private void init() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        //create the components
+        // Creating the components
         canvas = new DrawingPanel(this);
- //...TODO
+        configPanel = new ConfigPanel(this);
+        controlPanel = new ControlPanel(this);
 
-        //arrange the components in the container (frame)
+        // Arranging the components in the container (frame)
         //JFrame uses a BorderLayout by default
-        add(canvas, BorderLayout.CENTER); //this is BorderLayout.CENTER
-        add(configPanel, BorderLayout.NORTH);
-        add(controlPanel, BorderLayout.SOUTH);
-// ...TODO
+        add(canvas, CENTER);
+        add(configPanel, NORTH);
+        add(controlPanel, SOUTH);
 
-        //invoke the layout manager
+        // Invoking the layout manager
         pack();
     }
+
+
 }
