@@ -85,7 +85,7 @@ public class ClientThread implements Runnable {
                     int firstSpace = request.indexOf(" ");
 
                     if (firstSpace != -1) {
-                        register.RegisterCommand( request.substring(firstSpace+1), client, clients, pool);
+                       clients = register.RegisterCommand( request.substring(firstSpace+1), client, clients, pool);
                         messages += "Registered!";
                         out.println("Registered!");
                     }

@@ -17,10 +17,11 @@ public class Register {
                 this.out = out;
 
         }
-        public void RegisterCommand(String name, Socket clientSocket, ArrayList<ClientThread> clients, ExecutorService pool) throws IOException {
+        public ArrayList<ClientThread> RegisterCommand(String name, Socket clientSocket, ArrayList<ClientThread> clients, ExecutorService pool) throws IOException {
         // Send the response to the output stream: server → client
         ClientThread newClient = new ClientThread(clientSocket, clients, name, pool);
         clients.add(newClient);
+        return clients;
 }
 
 }
