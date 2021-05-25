@@ -1,0 +1,285 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://neo4j-documentation.github.io/developer-resources/language-guides/assets/css/main.css">
+<!--    <title>Movie-pedia</title>-->
+</head>
+
+<body>
+
+    <div role="navigation" class="navbar navbar-default navbar-static-top" stye="{background-color: #161B7F}">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <form role="search" class="navbar-form" id="search">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Cauta un film" class="form-control" name="search">
+                                </div>
+                                <button class="btn btn-default" type="submit">Cauta</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar-header col-sm-6 col-md-6">
+
+                    <div class="navbar-brand">
+                        <div class="brand">Movie-pedia</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div role="navigation" class="navbar navbar-default navbar-static-top" stye="{background-color: #161B7F}">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header col-sm-6 col-md-6">
+                    <div class="brand">
+                        <h4>Cauta filme dupa anul aparitiei</h4>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <form role="search" class="navbar-form" id="searchGenre">
+                                <button  class="btn btn-default" type="submit" value="Comedy">Cauta</button>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="an">
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">Filme</div>
+                <table id="results" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Titlu</th>
+                            <th>Anul aparitiei</th>
+                            <th>Descriere</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="title">Detalii</div>
+                <div class="row">
+                    <div class="col-sm-4 col-md-4">
+                        <img src="" class="well" id="poster" />
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <h4>Echipa</h4>
+                        <ul id="crew">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading" >
+                    <div role="navigation" class="navbar navbar-default navbar-static-top">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <ul class="nav navbar-nav">
+                                        <li>
+                                            Recomanda un film
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form method="POST" onsubmit="recommed()" class="navbar-form" id="recomand">
+                    <label>
+                        <input type="text" placeholder="Titlu film" class="form-control" name="title">
+                    </label>
+                    <label>
+                        <input type="text" placeholder="Anul lansarii" class="form-control" name="an">
+                    </label>
+                    <label>
+                        <input type="text" placeholder="Descriere" class="form-control" name="desc">
+                    </label>
+                    <label>
+                        <input type="text" placeholder="Aici scire numele tau" class="form-control" name="nume">
+                    </label>
+                    <button class="btn btn-default" type="submit">Recomanda filmul</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+        body {
+            background-color: #161B7F;
+        }
+        
+        .node {
+            stroke: #222;
+            stroke-width: 1.5px;
+        }
+        
+        .node.actor {
+            fill: #ED3D63;
+        }
+        
+        .node.movie {
+            fill: #223CCF;
+        }
+        
+        .link {
+            stroke: #83df83;
+            stroke-opacity: .6;
+            stroke-width: 1px;
+        }
+    </style>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function() {
+            function showMovie(title) {
+                $.get("/movie/" + encodeURIComponent(title),
+                    function(data) {
+                        if (!data) return;
+                        $("#title").text(data.title);
+                        $("#poster").attr("src", "http://neo4j-documentation.github.io/developer-resources/language-guides/assets/posters/" + encodeURIComponent(data.title) + ".jpg");
+                        var $list = $("#crew").empty();
+                        data.cast.forEach(function(cast) {
+                            $job = cast.job;
+                            $list.append($("<li>" + cast.name + " " + $job + ($job == "acted" ? " as " + cast.role : "") + "</li>"));
+                        });
+                    }, "json");
+                return false;
+            }
+
+            function search() {
+                var query = $("#search").find("input[name=search]").val();
+                $.get("/search?q=" + encodeURIComponent(query),
+                    function(data) {
+                        var t = $("table#results tbody").empty();
+                        if (!data || data.length == 0) return;
+                        data.forEach(function(row) {
+                            var movie = row.movie;
+                            $("<tr><td class='movie'>" + movie.title + "</td><td>" + movie.released + "</td><td>" + movie.tagline + "</td></tr>").appendTo(t)
+                                .click(function() {
+                                    showMovie($(this).find("td.movie").text());
+                                })
+                        });
+                        showMovie(data[0].movie.title);
+                    }, "json");
+                return false;
+            }
+
+            $("#search").submit(search);
+            search();
+
+            function genre() {
+                var query = $("#searchGenre").find("input[name=an]").val();
+                $.get("/an?an=" + encodeURIComponent(query),
+                    function(data) {
+                        var t = $("table#results tbody").empty();
+                        if (!data || data.length === 0) return;
+                        data.forEach(function(row) {
+                            var movie = row.movie;
+                            $("<tr><td class='movie'>" + movie.title + "</td><td>" + movie.released + "</td><td>" + movie.tagline + "</td></tr>").appendTo(t)
+                                .click(function() {
+                                    showMovie($(this).find("td.movie").text());
+                                })
+                        });
+                        showMovie(data[0].movie.title);
+                    }, "json");
+                return false;
+            }
+
+            $("#searchGenre").submit(genre);
+            genre();
+
+        })
+
+        function recommed() {
+            var action_src = "http://localhost:3001/recomand";
+            var your_form = document.getElementById('recomand');
+            your_form.action = action_src;
+            //window.location.replace("http://localhost:3001");
+        }
+
+        document.recommed.submit();
+
+        // $(function() {
+        //     function showMovie(title) {
+        //         $.get("/movie/" + encodeURIComponent(title),
+        //             function(data) {
+        //                 if (!data) return;
+        //                 $("#title").text(data.title);
+        //                 $("#poster").attr("src", "http://neo4j-documentation.github.io/developer-resources/language-guides/assets/posters/" + encodeURIComponent(data.title) + ".jpg");
+        //                 var $list = $("#crew").empty();
+        //                 data.cast.forEach(function(cast) {
+        //                     $job = cast.job;
+        //                     $list.append($("<li>" + cast.name + " " + $job + ($job == "acted" ? " as " + cast.role : "") + "</li>"));
+        //                 });
+        //             }, "json");
+        //         return false;
+        //     }
+        //
+        //
+        // })
+
+        // function genre() {
+        //     function showMovie(title) {
+        //         $.get("/movie/" + encodeURIComponent(title),
+        //             function(data) {
+        //                 if (!data) return;
+        //                 $("#title").text(data.title);
+        //                 $("#poster").attr("src", "http://neo4j-documentation.github.io/developer-resources/language-guides/assets/posters/" + encodeURIComponent(data.title) + ".jpg");
+        //                 var $list = $("#crew").empty();
+        //                 data.cast.forEach(function(cast) {
+        //                     $job = cast.job;
+        //                     $list.append($("<li>" + cast.name + " " + $job + ($job == "acted" ? " as " + cast.role : "") + "</li>"));
+        //                 });
+        //             }, "json");
+        //         return false;
+        //     }
+        //
+        //     function searchGenre() {
+        //         var query = $("#searchGenre").find(document.getElementById('genre')).val();
+        //         $.get("/genre?genre=" + encodeURIComponent(query),
+        //             function(data) {
+        //                 var t = $("table#results tbody").empty();
+        //                 if (!data || data.length === 0) return;
+        //                 data.forEach(function(row) {
+        //                     var movie = row.movie;
+        //                     $("<tr><td class='movie'>" + movie.title + "</td><td>" + movie.released + "</td><td>" + movie.tagline + "</td></tr>").appendTo(t)
+        //                         .click(function() {
+        //                             showMovie($(this).find("td.movie").text());
+        //                         })
+        //                 });
+        //                 showMovie(data[0].movie.title);
+        //             }, "json");
+        //         return false;
+        //     }
+        //
+        //     $("#searchGenre").submit(searchGenre);
+        //     searchGenre();
+        // }
+
+    </script>
+
+</body>
+
+</html>
